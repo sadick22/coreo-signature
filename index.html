@@ -258,7 +258,7 @@
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <p>Click <strong>Copy Signature</strong> — this copies the fully formatted signature to your clipboard.</p>
+        <p>Click <strong>Copy Signature</strong>: this copies the fully formatted signature to your clipboard.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
@@ -267,7 +267,7 @@
       </div>
     </div>
     <div class="note">
-      <strong>Note:</strong> The banner is an animated GIF — it will auto-play in Gmail, Apple Mail, and Outlook on the web. 
+      <strong>Note:</strong> The banner is an animated GIF, it will auto-play in Gmail, Apple Mail, and Outlook on the web. 
       Desktop Outlook may show only the first frame, which is normal.
     </div>
   </div>
@@ -297,11 +297,11 @@
     linkedin: 'https://www.linkedin.com/company/coreo-real-estate/',
   };
 
-  // Inline social icons (no external dependencies)
+  // Inline social icons — black circle background, white icon
   const ICONS = {
-    fb: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="%23333"/><path d="M15.12 5.32H17V2.14A26.11 26.11 0 0 0 14.26 2c-2.72 0-4.58 1.66-4.58 4.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V7.05c0-1.05.28-1.73 1.76-1.73z" fill="%23fff"/></svg>')}`,
-    ig: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="%23333"/><rect x="6.5" y="6.5" width="11" height="11" rx="3" fill="none" stroke="%23fff" stroke-width="1.2"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="%23fff" stroke-width="1.2"/><circle cx="15.2" cy="8.8" r="0.9" fill="%23fff"/></svg>')}`,
-    li: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="%23333"/><path d="M8.65 17.5H6.32V9.97h2.33V17.5zM7.48 8.99a1.35 1.35 0 1 1 0-2.7 1.35 1.35 0 0 1 0 2.7zM18.5 17.5h-2.33v-3.66c0-.87-.02-2-1.22-2s-1.4.95-1.4 1.93v3.73h-2.33V9.97h2.24v1.03h.03c.31-.59 1.07-1.22 2.2-1.22 2.36 0 2.79 1.55 2.79 3.57V17.5z" fill="%23fff"/></svg>')}`,
+    fb: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="%23222"/><path d="M13.4 20v-7.2h2.4l.4-2.8h-2.8V8.3c0-.8.2-1.4 1.4-1.4h1.5V4.4a20 20 0 0 0-2.2-.1c-2.2 0-3.6 1.3-3.6 3.7V10H8.1v2.8h2.4V20h2.9z" fill="%23fff"/></svg>')}`,
+    ig: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="%23222"/><rect x="6.8" y="6.8" width="10.4" height="10.4" rx="3" fill="none" stroke="%23fff" stroke-width="1.4"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="%23fff" stroke-width="1.4"/><circle cx="15" cy="9" r="0.85" fill="%23fff"/></svg>')}`,
+    li: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="%23222"/><path d="M8.9 17.5H6.6V10.2h2.3v7.3zM7.7 9.2a1.35 1.35 0 1 1 0-2.7 1.35 1.35 0 0 1 0 2.7zM18.3 17.5H16v-3.5c0-.85-.02-1.95-1.2-1.95s-1.37.93-1.37 1.88v3.57h-2.3V10.2h2.2v1h.03c.31-.58 1.06-1.2 2.18-1.2 2.33 0 2.76 1.53 2.76 3.53v3.97z" fill="%23fff"/></svg>')}`,
   };
 
   // ============================================================
@@ -314,28 +314,28 @@
     const a = document.getElementById('nameAr').value.trim();
     const p = document.getElementById('position').value.trim();
     const m = document.getElementById('mobile').value.trim();
-    const arLine = a ? `<tr><td style="font-size:13px;color:#888;font-family:Arial,sans-serif;padding-bottom:2px;">${a}</td></tr>` : '';
+    const arLine = a ? `<tr><td style="font-size:13px;color:#888;font-family:'Century Gothic',CenturyGothic,AppleGothic,sans-serif;padding-bottom:2px;">${a}</td></tr>` : '';
 
-    return `<table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#333;max-width:550px;border-collapse:collapse;">
+    return `<table cellpadding="0" cellspacing="0" border="0" style="font-family:'Century Gothic',CenturyGothic,AppleGothic,sans-serif;font-size:14px;color:#333;max-width:550px;border-collapse:collapse;">
   <tr>
-    <td style="vertical-align:top;padding-right:16px;border-right:2px solid #7ab141;width:90px;">
+    <td style="vertical-align:top;padding-right:16px;border-right:2px solid #cccccc;width:100px;">
       <a href="${COMPANY.websiteUrl}" target="_blank" style="text-decoration:none;">
-        <img src="${abs(LOGO_PATH)}" width="80" alt="Coreo" style="display:block;" />
+        <img src="${abs(LOGO_PATH)}" width="95" alt="Coreo" style="display:block;" />
       </a>
     </td>
     <td style="vertical-align:top;padding-left:16px;">
       <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-        <tr><td style="font-size:16px;font-weight:bold;color:#1a1a1a;font-family:Arial,Helvetica,sans-serif;padding-bottom:1px;">${n}</td></tr>
+        <tr><td style="font-size:16px;font-weight:bold;color:#1a1a1a;font-family:'Century Gothic',CenturyGothic,AppleGothic,sans-serif;padding-bottom:1px;">${n}</td></tr>
         ${arLine}
-        <tr><td style="font-size:13px;color:#555;font-family:Arial,Helvetica,sans-serif;padding-top:3px;padding-bottom:10px;">${p}</td></tr>
-        <tr><td style="font-size:13px;color:#333;font-family:Arial,Helvetica,sans-serif;padding-bottom:3px;">
-          <span style="font-weight:bold;color:#1a1a1a;">Mob:</span>&nbsp;<a href="tel:${m.replace(/\s/g,'')}" style="color:#333;text-decoration:none;">${m}</a>
+        <tr><td style="font-size:13px;color:#555;font-family:'Century Gothic',CenturyGothic,AppleGothic,sans-serif;padding-top:3px;padding-bottom:10px;">${p}</td></tr>
+        <tr><td style="font-size:13px;color:#333;font-family:'Century Gothic',CenturyGothic,AppleGothic,sans-serif;padding-bottom:3px;">
+          <span style="font-weight:bold;color:#1a1a1a;">Mob:</span>&nbsp;<a href="tel:${m.replace(/\s/g,'')}" style="color:#333;text-decoration:none;font-family:'Century Gothic',CenturyGothic,AppleGothic,sans-serif;">${m}</a>
         </td></tr>
-        <tr><td style="font-size:13px;color:#333;font-family:Arial,Helvetica,sans-serif;padding-bottom:10px;">
-          <span style="font-weight:bold;color:#1a1a1a;">Tel:</span>&nbsp;&nbsp;<a href="tel:+97440167000" style="color:#333;text-decoration:none;">${COMPANY.tel}</a>
+        <tr><td style="font-size:13px;color:#333;font-family:'Century Gothic',CenturyGothic,AppleGothic,sans-serif;padding-bottom:10px;">
+          <span style="font-weight:bold;color:#1a1a1a;">Tel:</span>&nbsp;&nbsp;<a href="tel:+97440167000" style="color:#333;text-decoration:none;font-family:'Century Gothic',CenturyGothic,AppleGothic,sans-serif;">${COMPANY.tel}</a>
         </td></tr>
-        <tr><td style="font-size:13px;font-family:Arial,Helvetica,sans-serif;padding-bottom:10px;">
-          <span style="font-weight:bold;color:#1a1a1a;">${COMPANY.name}</span> <span style="color:#ccc;">|</span> <a href="${COMPANY.websiteUrl}" style="color:#7ab141;text-decoration:none;">${COMPANY.website}</a>
+        <tr><td style="font-size:13px;font-family:'Century Gothic',CenturyGothic,AppleGothic,sans-serif;padding-bottom:10px;">
+          <span style="font-weight:bold;color:#1a1a1a;">${COMPANY.name}</span> <span style="color:#ccc;">|</span> <a href="${COMPANY.websiteUrl}" style="color:#7ab141;text-decoration:none;font-family:'Century Gothic',CenturyGothic,AppleGothic,sans-serif;">${COMPANY.website}</a>
         </td></tr>
         <tr><td>
           <a href="${COMPANY.facebook}" style="text-decoration:none;margin-right:5px;" target="_blank"><img src="${ICONS.fb}" width="20" height="20" alt="Facebook" style="vertical-align:middle;border:0;" /></a>
