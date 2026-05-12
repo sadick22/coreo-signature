@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coreo Email Signature Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f5f5f0;
+    min-height: 100vh;
+    color: #1a1a1a;
+  }
+
+  .app {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .header-logo img { height: 40px; }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+  }
+
+  .header p {
+    font-size: 15px;
+    color: #666;
+    max-width: 460px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 32px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+  }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7ab141;
+    margin-bottom: 24px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+  }
+
+  input {
+    padding: 12px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    background: #fafafa;
+  }
+
+  input:focus {
+    border-color: #7ab141;
+    box-shadow: 0 0 0 3px rgba(122,177,65,0.12);
+    background: #fff;
+  }
+
+  input::placeholder { color: #bbb; }
+
+  .generate-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: #7ab141;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 12px;
+  }
+
+  .generate-btn:hover { background: #6a9e38; }
+  .generate-btn:active { transform: scale(0.99); }
+
+  .preview-area {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+    margin-bottom: 32px;
+  }
+
+  .preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .preview-header .card-title { margin-bottom: 0; }
+
+  .copy-btn {
+    padding: 10px 28px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+    background: #1a1a1a;
+    color: #fff;
+  }
+
+  .copy-btn:hover { background: #333; }
+  .copy-btn.copied { background: #7ab141; }
+
+  .signature-preview {
+    border: 1px dashed #ddd;
+    border-radius: 12px;
+    padding: 24px;
+    background: #fefefe;
+    overflow-x: auto;
+  }
+
+  .instructions {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+  }
+
+  .steps { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+
+  .step-num {
+    width: 28px; height: 28px; min-width: 28px;
+    background: #7ab141; color: #fff; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+  }
+
+  .step p { font-size: 14px; color: #555; line-height: 1.5; padding-top: 3px; }
+  .step strong { color: #1a1a1a; }
+
+  .note {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: #f0f7e8;
+    border-left: 3px solid #7ab141;
+    border-radius: 0 10px 10px 0;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .note strong { color: #1a1a1a; }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .card, .preview-area, .instructions { padding: 24px; }
+    .app { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <div class="header-logo">
+      <img src="images/logo.png" alt="Coreo" onerror="this.style.display='none'">
+      <h1>Coreo Email Signature Generator</h1>
+    </div>
+    <p>Enter your details below, click Generate, then copy and paste into your email settings.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Your Details</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Full Name (English) *</label>
+        <input type="text" id="nameEn" placeholder="e.g. Jawdat Al Kateb">
+      </div>
+      <div class="form-group">
+        <label>Full Name (Arabic)</label>
+        <input type="text" id="nameAr" placeholder="e.g. جودت الكاتب" dir="rtl">
+      </div>
+      <div class="form-group">
+        <label>Position / Title *</label>
+        <input type="text" id="position" placeholder="e.g. General Manager">
+      </div>
+      <div class="form-group">
+        <label>Mobile Number *</label>
+        <input type="text" id="mobile" placeholder="e.g. +974 3024 4565">
+      </div>
+    </div>
+    <button class="generate-btn" onclick="generateSignature()">Generate My Signature</button>
+  </div>
+
+  <div class="preview-area" id="previewArea" style="display:none;">
+    <div class="preview-header">
+      <div class="card-title">Your Signature</div>
+      <button class="copy-btn" id="copyBtn" onclick="copySignature()">Copy Signature</button>
+    </div>
+    <div class="signature-preview" id="signaturePreview"></div>
+  </div>
+
+  <div class="instructions">
+    <div class="card-title">How to Set Up</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <p>Fill in your <strong>Name</strong>, <strong>Position</strong>, and <strong>Mobile</strong>, then click <strong>Generate</strong>.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <p>Click <strong>Copy Signature</strong> — this copies the fully formatted signature to your clipboard.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <p><strong>Gmail:</strong> Settings → See all settings → General → Signature → Paste.<br>
+           <strong>Outlook:</strong> Settings → Mail → Compose and reply → Signature → Paste.</p>
+      </div>
+    </div>
+    <div class="note">
+      <strong>Note:</strong> The banner is an animated GIF — it will auto-play in Gmail, Apple Mail, and Outlook on the web. 
+      Desktop Outlook may show only the first frame, which is normal.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ============================================================
+  //  CONFIGURATION — update these when you deploy
+  // ============================================================
+
+  // Auto-detects your Vercel domain after deployment
+  const BASE_URL = window.location.origin;
+
+  // Place these files in an "images" folder at the project root
+  const LOGO_PATH  = 'images/logo.png';
+  const BANNER_PATH = 'images/banner.gif';
+
+  // Fixed company info
+  const COMPANY = {
+    name: 'Coreo Real Estate',
+    tel: '+974 4016 7000',
+    website: 'mycoreo.com',
+    websiteUrl: 'https://mycoreo.com',
+    facebook: 'https://www.facebook.com/mycoreo/',
+    instagram: 'https://www.instagram.com/mycoreo/',
+    linkedin: 'https://www.linkedin.com/company/coreo-real-estate/',
+  };
+
+  // Inline social icons (no external dependencies)
+  const ICONS = {
+    fb: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="%23333"/><path d="M15.12 5.32H17V2.14A26.11 26.11 0 0 0 14.26 2c-2.72 0-4.58 1.66-4.58 4.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V7.05c0-1.05.28-1.73 1.76-1.73z" fill="%23fff"/></svg>')}`,
+    ig: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="%23333"/><rect x="6.5" y="6.5" width="11" height="11" rx="3" fill="none" stroke="%23fff" stroke-width="1.2"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="%23fff" stroke-width="1.2"/><circle cx="15.2" cy="8.8" r="0.9" fill="%23fff"/></svg>')}`,
+    li: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="%23333"/><path d="M8.65 17.5H6.32V9.97h2.33V17.5zM7.48 8.99a1.35 1.35 0 1 1 0-2.7 1.35 1.35 0 0 1 0 2.7zM18.5 17.5h-2.33v-3.66c0-.87-.02-2-1.22-2s-1.4.95-1.4 1.93v3.73h-2.33V9.97h2.24v1.03h.03c.31-.59 1.07-1.22 2.2-1.22 2.36 0 2.79 1.55 2.79 3.57V17.5z" fill="%23fff"/></svg>')}`,
+  };
+
+  // ============================================================
+  //  CORE
+  // ============================================================
+  function abs(path) { return `${BASE_URL}/${path}`; }
+
+  function buildHTML() {
+    const n = document.getElementById('nameEn').value.trim();
+    const a = document.getElementById('nameAr').value.trim();
+    const p = document.getElementById('position').value.trim();
+    const m = document.getElementById('mobile').value.trim();
+    const arLine = a ? `<tr><td style="font-size:13px;color:#888;font-family:Arial,sans-serif;padding-bottom:2px;">${a}</td></tr>` : '';
+
+    return `<table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#333;max-width:550px;border-collapse:collapse;">
+  <tr>
+    <td style="vertical-align:top;padding-right:16px;border-right:2px solid #7ab141;width:90px;">
+      <a href="${COMPANY.websiteUrl}" target="_blank" style="text-decoration:none;">
+        <img src="${abs(LOGO_PATH)}" width="80" alt="Coreo" style="display:block;" />
+      </a>
+    </td>
+    <td style="vertical-align:top;padding-left:16px;">
+      <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+        <tr><td style="font-size:16px;font-weight:bold;color:#1a1a1a;font-family:Arial,Helvetica,sans-serif;padding-bottom:1px;">${n}</td></tr>
+        ${arLine}
+        <tr><td style="font-size:13px;color:#555;font-family:Arial,Helvetica,sans-serif;padding-top:3px;padding-bottom:10px;">${p}</td></tr>
+        <tr><td style="font-size:13px;color:#333;font-family:Arial,Helvetica,sans-serif;padding-bottom:3px;">
+          <span style="font-weight:bold;color:#1a1a1a;">Mob:</span>&nbsp;<a href="tel:${m.replace(/\s/g,'')}" style="color:#333;text-decoration:none;">${m}</a>
+        </td></tr>
+        <tr><td style="font-size:13px;color:#333;font-family:Arial,Helvetica,sans-serif;padding-bottom:10px;">
+          <span style="font-weight:bold;color:#1a1a1a;">Tel:</span>&nbsp;&nbsp;<a href="tel:+97440167000" style="color:#333;text-decoration:none;">${COMPANY.tel}</a>
+        </td></tr>
+        <tr><td style="font-size:13px;font-family:Arial,Helvetica,sans-serif;padding-bottom:10px;">
+          <span style="font-weight:bold;color:#1a1a1a;">${COMPANY.name}</span> <span style="color:#ccc;">|</span> <a href="${COMPANY.websiteUrl}" style="color:#7ab141;text-decoration:none;">${COMPANY.website}</a>
+        </td></tr>
+        <tr><td>
+          <a href="${COMPANY.facebook}" style="text-decoration:none;margin-right:5px;" target="_blank"><img src="${ICONS.fb}" width="20" height="20" alt="Facebook" style="vertical-align:middle;border:0;" /></a>
+          <a href="${COMPANY.instagram}" style="text-decoration:none;margin-right:5px;" target="_blank"><img src="${ICONS.ig}" width="20" height="20" alt="Instagram" style="vertical-align:middle;border:0;" /></a>
+          <a href="${COMPANY.linkedin}" style="text-decoration:none;" target="_blank"><img src="${ICONS.li}" width="20" height="20" alt="LinkedIn" style="vertical-align:middle;border:0;" /></a>
+        </td></tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="padding-top:14px;">
+      <a href="${COMPANY.websiteUrl}" target="_blank" style="text-decoration:none;">
+        <img src="${abs(BANNER_PATH)}" width="500" alt="${COMPANY.name}" style="display:block;max-width:100%;height:auto;border-radius:4px;border:0;" />
+      </a>
+    </td>
+  </tr>
+</table>`;
+  }
+
+  function generateSignature() {
+    const n = document.getElementById('nameEn').value.trim();
+    const p = document.getElementById('position').value.trim();
+    const m = document.getElementById('mobile').value.trim();
+    if (!n || !p || !m) { alert('Please fill in your name, position, and mobile number.'); return; }
+
+    document.getElementById('signaturePreview').innerHTML = buildHTML();
+    document.getElementById('previewArea').style.display = 'block';
+    document.getElementById('previewArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  async function copySignature() {
+    const el = document.getElementById('signaturePreview');
+    const btn = document.getElementById('copyBtn');
+    const sigHTML = buildHTML();
+
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          'text/html': new Blob([sigHTML], { type: 'text/html' }),
+          'text/plain': new Blob([el.innerText], { type: 'text/plain' }),
+        })
+      ]);
+      ok();
+    } catch {
+      const r = document.createRange();
+      r.selectNodeContents(el);
+      const s = window.getSelection();
+      s.removeAllRanges(); s.addRange(r);
+      document.execCommand('copy');
+      s.removeAllRanges();
+      ok();
+    }
+
+    function ok() {
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy Signature'; btn.classList.remove('copied'); }, 2500);
+    }
+  }
+</script>
+</body>
+</html>
