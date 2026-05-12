@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Coreo Email Signature Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
 <style>
   @font-face {
     font-family: 'Century Gothic';
@@ -388,7 +389,7 @@
     const mDisplay = formatMobile(mRaw);
     const mTel = mobileForTel(mRaw);
 
-    const arLine = a ? `<tr><td style="font-size:13px;color:#888;font-family:${FONT};padding-bottom:2px;">${a}</td></tr>` : '';
+    const arLine = a ? `<tr><td style="font-size:13px;color:#888;font-family:'Almarai',Arial,sans-serif;padding-bottom:2px;">${a}</td></tr>` : '';
 
     return `<table cellpadding="0" cellspacing="0" border="0" style="font-family:${FONT};font-size:14px;color:#333;max-width:550px;border-collapse:collapse;">
   <tr>
@@ -401,7 +402,7 @@
       <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
         <tr><td style="font-size:16px;font-weight:bold;color:#1a1a1a;font-family:${FONT};padding-bottom:1px;">${n}</td></tr>
         ${arLine}
-        <tr><td style="font-size:13px;color:#555;font-family:${FONT};padding-top:3px;padding-bottom:12px;">${p}</td></tr>
+        <tr><td style="font-size:13px;color:#555;font-family:${FONT};padding-top:3px;padding-bottom:18px;">${p}</td></tr>
         <tr><td style="font-size:13px;color:#333;font-family:${FONT};padding-bottom:8px;">
           <span style="font-weight:bold;color:#1a1a1a;">Mob:</span>&nbsp; <a href="tel:${mTel}" style="color:#333;text-decoration:none;font-family:${FONT};">${mDisplay}</a>
         </td></tr>
